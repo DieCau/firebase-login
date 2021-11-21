@@ -3,11 +3,15 @@ import { Stack, Container, Form, Button } from 'react-bootstrap';
 
 import firebaseApp from '../credentials';
 import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
+  getAuth, 
+  createUserWithEmailAndPassword, 
+  signInWithEmailAndPassword, 
+  signInWithRedirect,
+  GoogleAuthProvider,  
 } from 'firebase/auth';
+
 const auth = getAuth(firebaseApp);
+const googleProvider = new GoogleAuthProvider();
 
 const Login = () => {
   const [nowRegister, setNowRegister] = useState(false);
@@ -54,7 +58,7 @@ const Login = () => {
           </Button>
         </Form>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" onClick={ ()=> signInWithRedirect(auth, googleProvider) }>
           Acceder con Google
         </Button>
 
